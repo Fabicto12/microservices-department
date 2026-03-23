@@ -1,0 +1,37 @@
+package net.javaguides.department_service.CONTROLLER;
+
+import lombok.AllArgsConstructor;
+import net.javaguides.department_service.DTO.DepartmentDto;
+import net.javaguides.department_service.SERVICE.DepartmentService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.service.annotation.PatchExchange;
+
+@RestController
+@RequestMapping("api/departments")
+@AllArgsConstructor
+public class DepartmentController {
+
+
+    private DepartmentService departmentService;
+
+    //Build save department REST API
+@PostMapping
+    public ResponseEntity<DepartmentDto> saveDepartment(@RequestBody DepartmentDto departmentDto){
+        DepartmentDto savedDepartment = departmentService.saveDepartment(departmentDto);
+
+        return new ResponseEntity<>(savedDepartment, HttpStatus.CREATED);
+
+    }
+
+    //Build get department by code REST API
+
+    @GetMapping("api/departments/{department-code}")
+    public ResponseEntity<DepartmentDto> getDepartment(@PathVariable("department-code")
+                                                           String departmentCode){
+
+    DepartmentDto departmentDto = departmentService.getDepartmentByCode(departmentCode);
+     return new ResponseEntity<>(departmentDto, HttpStatus.OK);
+    }
+ }
