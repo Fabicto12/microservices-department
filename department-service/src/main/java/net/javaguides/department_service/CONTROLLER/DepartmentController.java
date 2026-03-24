@@ -17,7 +17,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     //Build save department REST API
-@PostMapping
+    @PostMapping
     public ResponseEntity<DepartmentDto> saveDepartment(@RequestBody DepartmentDto departmentDto){
         DepartmentDto savedDepartment = departmentService.saveDepartment(departmentDto);
 
@@ -27,9 +27,8 @@ public class DepartmentController {
 
     //Build get department by code REST API
 
-    @GetMapping("api/departments/{department-code}")
-    public ResponseEntity<DepartmentDto> getDepartment(@PathVariable("department-code")
-                                                           String departmentCode){
+    @GetMapping("{department-code}")
+    public ResponseEntity<DepartmentDto> getDepartment(@PathVariable("department-code") String departmentCode){
 
     DepartmentDto departmentDto = departmentService.getDepartmentByCode(departmentCode);
      return new ResponseEntity<>(departmentDto, HttpStatus.OK);
